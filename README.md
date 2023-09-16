@@ -7,6 +7,8 @@ Run [Pocketbase](https://pocketbase.io/) Server directly from Android/IOS with f
 
 ## Usage
 
+Checkout [Pocketbase Server](https://github.com/rohitsangwan01/pocketbase_server_flutter_app) example app
+
 Start pocketbaseServer 
 
 ```dart
