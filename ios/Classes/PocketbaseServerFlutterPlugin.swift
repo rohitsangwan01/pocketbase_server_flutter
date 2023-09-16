@@ -41,7 +41,7 @@ public class PocketbaseServerFlutterPlugin: NSObject, FlutterPlugin {
     let dataPath = (argument?["dataPath"] as? String) ?? getDefaultDirectory()
     let enablePocketbaseApiLogs: Bool = (argument?["enablePocketbaseApiLogs"] as? Bool) ?? true
     if dataPath == nil {
-      result(FlutterError(code: "dataPathError", message: "Please pass valid datapath", details: nil))
+      result(FlutterError(code: "dataPathError", message: "Please pass valid dataPath", details: nil))
       return
     }
     DispatchQueue.global(qos: .userInitiated).async {
@@ -89,10 +89,12 @@ public class PocketbaseServerFlutterPlugin: NSObject, FlutterPlugin {
 
 class PocketMobileCallbackHandler: NSObject, PocketbaseMobileNativeBridgeProtocol {
   func handleCallback(_ p0: String?, p1: String?) -> String {
-    if p0 == "error" {
-      PocketbaseServerFlutterPlugin.isRunning = false
+    DispatchQueue.main.async {
+      if p0 == "error" {
+        PocketbaseServerFlutterPlugin.isRunning = false
+      }
+      PocketbaseServerFlutterPlugin.messageConnector?.sendMessage(["type": p0 ?? "", "data": p1 ?? ""])
     }
-    PocketbaseServerFlutterPlugin.messageConnector?.sendMessage(["type": p0 ?? "", "data": p1 ?? ""])
     return "reply from ios native"
   }
 }
