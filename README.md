@@ -1,5 +1,7 @@
 # Pocketbase Server Flutter
 
+[![pocketbase_server version](https://img.shields.io/pub/v/pocketbase_server_flutter?label=pocketbase_server_flutter)](https://pub.dev/packages/pocketbase_server_flutter)
+
 Run [Pocketbase](https://pocketbase.io/) Server directly from Android/IOS with flutter 
 
 
