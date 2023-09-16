@@ -12,8 +12,8 @@ Checkout [Pocketbase Server](https://github.com/rohitsangwan01/pocketbase_server
 Start pocketbaseServer 
 
 ```dart
-PocketbaseMobileFlutter.start(
-  hostName: await PocketbaseMobileFlutter.localIpAddress,
+PocketbaseServerFlutter.start(
+  hostName: await PocketbaseServerFlutter.localIpAddress,
   port: "8080",
   dataPath: null,
   enablePocketbaseApiLogs: true,
@@ -23,13 +23,13 @@ PocketbaseMobileFlutter.start(
 Stop pocketbaseServer
 
 ```dart
-PocketbaseMobileFlutter.stop();
+PocketbaseServerFlutter.stop();
 ```
 
 Listen to pocketbaseServer events, setup eventCallback
 
 ```dart
-PocketbaseMobileFlutter.setEventCallback(
+PocketbaseServerFlutter.setEventCallback(
     callback: (event, data){
         // Handle event and data
     },
@@ -40,13 +40,13 @@ Some helper methods
 
 ```dart
 // To check if pocketBase is running (not reliable)
-PocketbaseMobileFlutter.isRunning
+PocketbaseServerFlutter.isRunning
 
 // To check pocketbaseMobile version
-PocketbaseMobileFlutter.pocketbaseMobileVersion
+PocketbaseServerFlutter.pocketbaseMobileVersion
 
 // To get the ipAddress of mobile ( to run pocketbase with this hostname )
-PocketbaseMobileFlutter.localIpAddress
+PocketbaseServerFlutter.localIpAddress
 ```
 
 

@@ -7,9 +7,11 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-
-<!--    <service-->
-<!--        android:name=".com.rohit.pocketbase_server_flutter.PocketbaseService"-->
-<!--        android:enabled="true" />-->
+    <application>
+        <service
+            android:name="com.rohit.pocketbase_server_flutter.PocketbaseService"
+            android:enabled="true" 
+            android:exported="true"/>
+    </application>
 
 </manifest>
