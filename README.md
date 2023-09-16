@@ -75,3 +75,7 @@ https://pocketbase.io/
 
 Built with: [pocketbase_mobile](https://github.com/rohitsangwan01/pocketbase_mobile), [pocketbase_android](https://github.com/rohitsangwan01/pocketbase_android
 ), [pocketbase_ios](https://github.com/rohitsangwan01/pocketbase_ios)
+
+## Note
+
+This is for running Pocketbase server from mobile, to connect with pocketbase server, use official [pockebase](https://pub.dev/packages/pocketbase) client plugin
