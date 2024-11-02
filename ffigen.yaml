@@ -1,0 +1,16 @@
+# Run with `dart pub run ffigen --config ffigen.yaml`.
+name: NativeLibrary
+description: Bindings to `src/sum.h`.
+output: "lib/generated_bindings.dart"
+headers:
+  entry-points:
+    - "pocketbase_server_flutter.h"
+preamble: |
+  // ignore_for_file: always_specify_types
+  // ignore_for_file: camel_case_types
+  // ignore_for_file: non_constant_identifier_names
+  // ignore_for_file: unused_field
+  // ignore_for_file: unused_element
+comments:
+  style: any
+  length: full

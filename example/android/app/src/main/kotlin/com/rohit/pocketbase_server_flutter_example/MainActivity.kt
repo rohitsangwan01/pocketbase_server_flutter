@@ -2,5 +2,4 @@ package com.rohit.pocketbase_server_flutter_example
 
 import io.flutter.embedding.android.FlutterActivity
 
-class MainActivity: FlutterActivity() {
-}
+class MainActivity: FlutterActivity()
