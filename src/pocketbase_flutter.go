@@ -128,6 +128,7 @@ func setupPocketbaseCallbacks(app *pocketbase.PocketBase, getApiLogs bool) {
 		return nil
 	})
 	app.OnTerminate().Add(func(e *core.TerminateEvent) error {
+		app = nil
 		sendCommand("OnTerminate", "")
 		return nil
 	})
