@@ -75,7 +75,8 @@ class PocketbaseServerFlutter {
     const String libName = 'libpocketbase';
     if (kIsWeb) throw "Not supported";
     if (Platform.isIOS) {
-      return DynamicLibrary.open('$libName.framework/$libName');
+      return DynamicLibrary.open(
+          'pocketbase_server_flutter.framework/pocketbase_server_flutter');
     } else if (Platform.isMacOS) {
       return DynamicLibrary.open('$libName.dylib');
     } else if (Platform.isAndroid || Platform.isLinux) {
