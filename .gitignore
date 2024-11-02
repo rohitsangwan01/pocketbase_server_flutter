@@ -28,5 +28,5 @@ migrate_working_dir/
 .dart_tool/
 build/
 android/src/main/jniLibs/
-ios/pocketbase_server_flutter.xcframework
-macos/pocketbase_server_flutter.dylib
+ios/libpocketbase.xcframework
+macos/libpocketbase.dylib

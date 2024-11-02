@@ -4,7 +4,7 @@ description: Bindings to `src/sum.h`.
 output: "lib/generated_bindings.dart"
 headers:
   entry-points:
-    - "pocketbase_server_flutter.h"
+    - "libpocketbase.h"
 preamble: |
   // ignore_for_file: always_specify_types
   // ignore_for_file: camel_case_types

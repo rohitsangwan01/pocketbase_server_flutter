@@ -30,8 +30,8 @@ class PocketbaseServerFlutter {
     return _bindings.isRunning() == 1;
   }
 
-  static Future get pocketbaseVersion async {
-    return _bindings.getVersion();
+  static Future<String> get pocketbaseVersion async {
+    return _bindings.getVersion().cast<Utf8>().toDartString();
   }
 
   static void setEventCallback({
@@ -72,16 +72,13 @@ class PocketbaseServerFlutter {
   }
 
   static final DynamicLibrary _dylib = () {
-    const String libName = 'pocketbase_server_flutter';
+    const String libName = 'libpocketbase';
     if (kIsWeb) throw "Not supported";
-
     if (Platform.isMacOS || Platform.isIOS) {
       return DynamicLibrary.open('$libName.framework/$libName');
-    }
-    if (Platform.isAndroid || Platform.isLinux) {
-      return DynamicLibrary.open('pocketbase_server_flutter.so');
-    }
-    if (Platform.isWindows) {
+    } else if (Platform.isAndroid || Platform.isLinux) {
+      return DynamicLibrary.open('$libName.so');
+    } else if (Platform.isWindows) {
       return DynamicLibrary.open('$libName.dll');
     }
     throw UnsupportedError('Unknown platform: ${Platform.operatingSystem}');

@@ -24,12 +24,17 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    PocketbaseServerFlutter.setEventCallback(callback: (event, data) {
-      print("Event: $event");
-      setState(() {
-        logs.add("$event - $data");
+    try {
+      PocketbaseServerFlutter.setEventCallback(callback: (event, data) {
+        print("Event: $event");
+        setState(() {
+          logs.add("$event - $data");
+        });
       });
-    });
+    } catch (e) {
+      print("Failed to set callback $e");
+    }
+
     super.initState();
   }
 

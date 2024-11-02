@@ -102,13 +102,15 @@ class NativeLibrary {
       _lookup<ffi.NativeFunction<GoUint8 Function()>>('isRunning');
   late final _isRunning = _isRunningPtr.asFunction<int Function()>();
 
-  GoString getVersion() {
+  ffi.Pointer<ffi.Char> getVersion() {
     return _getVersion();
   }
 
   late final _getVersionPtr =
-      _lookup<ffi.NativeFunction<GoString Function()>>('getVersion');
-  late final _getVersion = _getVersionPtr.asFunction<GoString Function()>();
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
+          'getVersion');
+  late final _getVersion =
+      _getVersionPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
 
   void enforce_binding() {
     return _enforce_binding();
@@ -254,7 +256,6 @@ typedef GoInt64 = ffi.LongLong;
 typedef DartGoInt64 = int;
 typedef GoUint8 = ffi.UnsignedChar;
 typedef DartGoUint8 = int;
-typedef GoString = _GoString_;
 
 const int __has_safe_buffers = 1;
 

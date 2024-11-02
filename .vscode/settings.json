@@ -3,6 +3,7 @@
         "Dcomplex",
         "Fcomplex",
         "GOSTRING",
+        "libpocketbase",
         "stdlib"
     ]
 }

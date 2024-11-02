@@ -28,7 +28,7 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   network_info_plus: 6613d9d7cdeb0e6f366ed4dbe4b3c51c52d567a9
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
-  pocketbase_server_flutter: 31275380ffce91e73056552a63fc69a5e227f05c
+  pocketbase_server_flutter: 8b51a108751a8fe5072abca36441a7397f11af14
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 

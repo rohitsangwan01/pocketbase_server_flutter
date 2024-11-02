@@ -71,12 +71,11 @@ func isRunning() bool {
 }
 
 //export getVersion
-func getVersion() string {
-	return pocketbase.Version
+func getVersion() *C.char {
+	return C.CString(pocketbase.Version)
 }
 
 func sendCommand(command string, data string) {
-	println("Command", command, "Data", data)
 	cCommand := C.CString(command)
 	cData := C.CString(data)
 	C.callFlutterBridgeHelper(cCommand, cData)

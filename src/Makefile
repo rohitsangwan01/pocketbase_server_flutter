@@ -1,7 +1,7 @@
 ANDROID_OUT=../android/src/main/jniLibs
 ANDROID_SDK=$(HOME)/Library/Android/sdk
 NDK_BIN=$(ANDROID_SDK)/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin
-LIB_NAME=pocketbase_server_flutter
+LIB_NAME=libpocketbase
 
 android-armv7a:
 	CGO_ENABLED=1 \
@@ -96,7 +96,7 @@ macos:
 		${LIB_NAME}_arm64.dylib \
 		${LIB_NAME}_amd64.dylib \
 		-output ${LIB_NAME}.dylib
-	install_name_tool -id "@rpath/pocketbase_server_flutter.dylib" pocketbase_server_flutter.dylib
+	install_name_tool -id "@rpath/libpocketbase.dylib" libpocketbase.dylib
 	mv ${LIB_NAME}.dylib ../macos/${LIB_NAME}.dylib
 	mv ${LIB_NAME}_amd64.h ../${LIB_NAME}.h
 	rm ${LIB_NAME}_*.h

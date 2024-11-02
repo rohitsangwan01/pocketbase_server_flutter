@@ -28,7 +28,7 @@ SPEC CHECKSUMS:
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
   network_info_plus: 7a508beb58da171b7e30c45f4d7b74814e475968
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
-  pocketbase_server_flutter: c972d0747662ed45a320c996491aecdce73d06f8
+  pocketbase_server_flutter: d8c316db1356d960e110af4158237f69cb4968d2
 
 PODFILE CHECKSUM: 236401fc2c932af29a9fcf0e97baeeb2d750d367
 

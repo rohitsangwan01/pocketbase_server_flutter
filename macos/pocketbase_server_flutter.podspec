@@ -13,7 +13,7 @@ A new Flutter FFI plugin project.
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'FlutterMacOS'
-  s.vendored_libraries  = 'pocketbase_server_flutter.dylib'
+  s.vendored_libraries  = 'libpocketbase.dylib'
 
   s.platform = :osx, '10.11'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
