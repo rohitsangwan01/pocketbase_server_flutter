@@ -1,0 +1,35 @@
+PODS:
+  - FlutterMacOS (1.0.0)
+  - network_info_plus (0.0.1):
+    - FlutterMacOS
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - pocketbase_server_flutter (0.0.1):
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - FlutterMacOS (from `Flutter/ephemeral`)
+  - network_info_plus (from `Flutter/ephemeral/.symlinks/plugins/network_info_plus/macos`)
+  - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin`)
+  - pocketbase_server_flutter (from `Flutter/ephemeral/.symlinks/plugins/pocketbase_server_flutter/macos`)
+
+EXTERNAL SOURCES:
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+  network_info_plus:
+    :path: Flutter/ephemeral/.symlinks/plugins/network_info_plus/macos
+  path_provider_foundation:
+    :path: Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin
+  pocketbase_server_flutter:
+    :path: Flutter/ephemeral/.symlinks/plugins/pocketbase_server_flutter/macos
+
+SPEC CHECKSUMS:
+  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
+  network_info_plus: 7a508beb58da171b7e30c45f4d7b74814e475968
+  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  pocketbase_server_flutter: d8c316db1356d960e110af4158237f69cb4968d2
+
+PODFILE CHECKSUM: 236401fc2c932af29a9fcf0e97baeeb2d750d367
+
+COCOAPODS: 1.15.2
