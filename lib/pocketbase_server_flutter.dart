@@ -58,9 +58,9 @@ class PocketbaseServerFlutter {
         } else {
           continue;
         }
-        var assetBytes = await rootBundle.load(asset);
-        await file.writeAsBytes(assetBytes.buffer.asUint8List());
       }
+      var assetBytes = await rootBundle.load(asset);
+      await file.writeAsBytes(assetBytes.buffer.asUint8List());
     }
   }
 
