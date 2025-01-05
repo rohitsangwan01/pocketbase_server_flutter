@@ -118,7 +118,9 @@ class PocketbaseServerFlutterPlugin : FlutterPlugin, MethodChannel.MethodCallHan
         (arguments["enablePocketbaseApiLogs"] as Boolean?)?.let {
             intent.putExtra("enablePocketbaseApiLogs", it)
         }
-
+        (arguments["staticFilesPath"] as String?)?.let {
+            intent.putExtra("staticFilesPath", it)
+        }
     }
 
     private fun stopPocketbaseService(result: MethodChannel.Result) {

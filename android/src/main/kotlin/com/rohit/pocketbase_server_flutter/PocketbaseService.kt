@@ -11,6 +11,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,7 @@ class PocketbaseService : Service() {
     private var serviceWakeLock = "PocketbaseServiceWakelock"
     private var hostname = Utils.defaultHostName
     private var port = Utils.defaultPort
+    private var staticFilesPath = ""
     private var enablePocketbaseApiLogs = false
     private val uiScope = CoroutineScope(Dispatchers.Main + Job())
     private var wakeLock: PowerManager.WakeLock? = null
@@ -49,8 +51,9 @@ class PocketbaseService : Service() {
             intent?.extras?.getString("dataPath")?.let { dataPath = it }
             intent?.extras?.getString("hostName")?.let { hostname = it }
             intent?.extras?.getString("port")?.let { port = it }
+            intent?.extras?.getString("staticFilesPath")?.let { staticFilesPath = it }
             enablePocketbaseApiLogs = intent?.extras?.getBoolean("enablePocketbaseApiLogs") ?: false
-            startPocketbase(dataPath, hostname, port)
+            startPocketbase(dataPath, hostname, port, staticFilesPath)
         }
         return super.onStartCommand(intent, flags, startId)
     }
@@ -81,10 +84,22 @@ class PocketbaseService : Service() {
         startForeground(124412, notification.build())
     }
 
-    private fun startPocketbase(dataPath: String, hostname: String, port: String) {
+    private fun startPocketbase(
+        dataPath: String,
+        hostname: String,
+        port: String,
+        staticFilesPath: String,
+    ) {
+        Log.d("Pocketbase", "StartingPocketbase with $staticFilesPath")
         uiScope.launch {
             withContext(Dispatchers.IO) {
-                PocketbaseMobile.startPocketbase(dataPath, hostname, port, enablePocketbaseApiLogs)
+                PocketbaseMobile.startPocketbase(
+                    dataPath,
+                    hostname,
+                    port,
+                    staticFilesPath,
+                    enablePocketbaseApiLogs,
+                )
             }
         }
     }

@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath 'com.android.tools.build:gradle:8.3.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -26,7 +26,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 33
+    namespace 'com.rohit.pocketbase_server_flutter'
+
+    compileSdk 34
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -48,10 +50,10 @@ android {
 
     dependencies {
         testImplementation 'org.jetbrains.kotlin:kotlin-test'
-        testImplementation 'org.mockito:mockito-core:5.1.1'
+        testImplementation 'org.mockito:mockito-core:5.2.0'
         implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
-        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-        implementation 'com.github.rohitsangwan01:pocketbase_android:1.0.0'
+        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+        implementation 'com.github.rohitsangwan01:pocketbase_android:2.0.1'
     }
 
     testOptions {

@@ -1,6 +1,10 @@
 // ignore_for_file: avoid_print
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pocketbase_server_flutter/pocketbase_server_flutter.dart';
 
 void main() {
@@ -31,6 +35,31 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
+  void startServer() async {
+    final Directory staticDir = await getTemporaryDirectory();
+    final String staticFolder = "${staticDir.path}/pb_public/";
+    final String dataFolder = "${staticDir.path}/pb_data/";
+
+    await PocketbaseServerFlutter.copyAssetsToPath(
+      path: staticFolder,
+      assets: [
+        "assets/index.html",
+      ],
+      overwriteExisting: true,
+    );
+
+    print("StaticDir: $staticFolder");
+
+    // Serve this directory
+    await PocketbaseServerFlutter.start(
+      hostName: await PocketbaseServerFlutter.localIpAddress,
+      port: "5000",
+      enablePocketbaseApiLogs: true,
+      dataPath: dataFolder,
+      staticFilesPath: staticFolder,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,18 +82,14 @@ class _MyAppState extends State<MyApp> {
               children: [
                 ElevatedButton(
                     onPressed: () async {
-                      await PocketbaseServerFlutter.start(
-                        hostName: await PocketbaseServerFlutter.localIpAddress,
-                        port: "5000",
-                        enablePocketbaseApiLogs: true,
-                      );
+                      startServer();
                     },
                     child: const Text("Start")),
                 ElevatedButton(
                     onPressed: () {
                       PocketbaseServerFlutter.stop();
                     },
-                    child: const Text("Start")),
+                    child: const Text("Stop")),
               ],
             ),
             const Divider(),
