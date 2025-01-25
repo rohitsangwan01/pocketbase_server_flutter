@@ -1,3 +1,10 @@
+## 1.0.0
+
+- Update Pocketbase 0.24.4
+- Add hooks support
+- Add ability to pass SuperUser email and password
+- Add utility methods to load hook and static files
+
 ## 0.0.2
 
 - Update Pocketbase 0.24

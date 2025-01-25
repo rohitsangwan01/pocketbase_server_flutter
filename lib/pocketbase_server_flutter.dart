@@ -10,10 +10,13 @@ class PocketbaseServerFlutter {
   );
 
   static Future<void> start({
+    required String superUserEmail,
+    required String superUserPassword,
     String? hostName,
     String? port,
     String? dataPath,
     String? staticFilesPath,
+    String? hookFilesPath,
     bool? enablePocketbaseApiLogs,
   }) async {
     await _channel.invokeMethod("start", {
@@ -22,6 +25,9 @@ class PocketbaseServerFlutter {
       "dataPath": dataPath,
       "staticFilesPath": staticFilesPath,
       "enablePocketbaseApiLogs": enablePocketbaseApiLogs,
+      "superUserEmail": superUserEmail,
+      "superUserPassword": superUserPassword,
+      "hookFilesPath": hookFilesPath,
     });
   }
 
@@ -34,6 +40,25 @@ class PocketbaseServerFlutter {
   static Future<String?> get localIpAddress =>
       _channel.invokeMethod("getLocalIpAddress");
 
+  // Copy all assets from given asset folder to the given path
+  static Future<void> copyAssetsFolderToPath({
+    required String path,
+    required String assetFolder,
+    bool overwriteExisting = false,
+  }) async {
+    var assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
+    final assetsList = assetManifest
+        .listAssets()
+        .where((string) => string.startsWith(assetFolder))
+        .toList();
+    return copyAssetsToPath(
+      path: path,
+      assets: assetsList,
+      overwriteExisting: overwriteExisting,
+    );
+  }
+
+  // Copy all assets from given asset files to the given path
   static Future<void> copyAssetsToPath({
     required String path,
     required List<String> assets,

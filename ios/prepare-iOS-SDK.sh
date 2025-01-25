@@ -1,16 +1,18 @@
 # chmod +x prepare-iOS-SDK.sh
 
 #!/bin/sh
-REPO_NAME="pocketbase_ios"
 FRAMEWORK_NAME="PocketbaseMobile.xcframework"
+Version="1.0.0"
 
 #!/bin/sh
-rm -fR ${REPO_NAME}
-mkdir ${REPO_NAME}
-git clone https://github.com/rohitsangwan01/${REPO_NAME}
+rm -fR ${FRAMEWORK_NAME}
+rm -f ${FRAMEWORK_NAME}.zip
+
+# Download the zip file
+curl -L -o ${FRAMEWORK_NAME}.zip "https://github.com/rohitsangwan01/pocketbase_mobile/releases/download/${Version}/${FRAMEWORK_NAME}.zip"
 
 # unzip PocketbaseMobile.xcframework.zip and extract the xcframework folder
-unzip ${REPO_NAME}/${FRAMEWORK_NAME}.zip -d ${REPO_NAME}  
+unzip ${FRAMEWORK_NAME}.zip   
 
- # Keep only the xcframework folder
-find ./${REPO_NAME} -mindepth 1 -maxdepth 1 -not -name ${FRAMEWORK_NAME} -exec rm -rf '{}' \;  
+# Remove the zip file
+rm -f ${FRAMEWORK_NAME}.zip

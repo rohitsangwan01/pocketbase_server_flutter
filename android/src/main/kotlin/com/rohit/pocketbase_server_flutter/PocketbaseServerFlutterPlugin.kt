@@ -1,6 +1,7 @@
 package com.rohit.pocketbase_server_flutter
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -49,10 +50,20 @@ class PocketbaseServerFlutterPlugin : FlutterPlugin, MethodChannel.MethodCallHan
             StandardMessageCodec.INSTANCE
         )
         channel?.setMethodCallHandler(this)
-        flutterPluginBinding.applicationContext.registerReceiver(
-            broadcastReceiver,
-            IntentFilter(broadcastEventAction)
-        )
+
+        @SuppressLint("UnspecifiedRegisterReceiverFlag")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            flutterPluginBinding.applicationContext.registerReceiver(
+                broadcastReceiver,
+                IntentFilter(broadcastEventAction), Context.RECEIVER_EXPORTED
+            )
+        } else {
+            flutterPluginBinding.applicationContext.registerReceiver(
+                broadcastReceiver,
+                IntentFilter(broadcastEventAction)
+            )
+        }
+
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
@@ -120,6 +131,15 @@ class PocketbaseServerFlutterPlugin : FlutterPlugin, MethodChannel.MethodCallHan
         }
         (arguments["staticFilesPath"] as String?)?.let {
             intent.putExtra("staticFilesPath", it)
+        }
+        (arguments["superUserEmail"] as String?)?.let {
+            intent.putExtra("superUserEmail", it)
+        }
+        (arguments["superUserPassword"] as String?)?.let {
+            intent.putExtra("superUserPassword", it)
+        }
+        (arguments["hookFilesPath"] as String?)?.let {
+            intent.putExtra("hookFilesPath", it)
         }
     }
 

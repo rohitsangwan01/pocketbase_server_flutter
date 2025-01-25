@@ -2,8 +2,7 @@
 
 [![pocketbase_server version](https://img.shields.io/pub/v/pocketbase_server_flutter?label=pocketbase_server_flutter)](https://pub.dev/packages/pocketbase_server_flutter)
 
-Run [Pocketbase](https://pocketbase.io/) Server directly from Android/IOS with flutter 
-
+Run [Pocketbase](https://pocketbase.io/) Server directly from Android/IOS with flutter
 
 ![Screenshot 2023-09-16 at 12 09 12 PM](https://github.com/rohitsangwan01/pocketbase_server_flutter/assets/59526499/4fa49d31-b9f6-4161-8f6b-050c2dea6d2a)
 
@@ -11,14 +10,54 @@ Run [Pocketbase](https://pocketbase.io/) Server directly from Android/IOS with f
 
 Checkout [Pocketbase Server](https://github.com/rohitsangwan01/pocketbase_server_flutter_app) example app
 
-Start pocketbaseServer 
+Start pocketbaseServer
 
 ```dart
 PocketbaseServerFlutter.start(
+  superUserEmail: "test@user.com",
+  superUserPassword: "password",
   hostName: await PocketbaseServerFlutter.localIpAddress,
   port: "8080",
-  dataPath: null,
+);
+```
+
+### Advance Usage
+
+```dart
+// Get path to load resources using `path_provider`
+final Directory staticDir = await getTemporaryDirectory();
+
+// Directory to load static files (Optional)
+final String staticFolder = "${staticDir.path}/pb_static/";
+
+// Directory to load js hook files (Optional)
+final String hooksFolder = "${staticDir.path}/pb_hooks/";
+
+// Directory to save sqlite files and default data
+final String dataFolder = "${staticDir.path}/pb_data/";
+
+// add `pb_static` and `pb_hooks` folder in assets of your project, and load all files from assets to given path
+await PocketbaseServerFlutter.copyAssetsFolderToPath(
+  path: staticFolder,
+  assetFolder: "pb_static",
+  overwriteExisting: true,
+)
+
+await PocketbaseServerFlutter.copyAssetsFolderToPath(
+  path: hooksFolder,
+  assetFolder: "pb_hooks",
+  overwriteExisting: true,
+);
+
+PocketbaseServerFlutter.start(
+  superUserEmail: "test@user.com",
+  superUserPassword: "password",
+  hostName: await PocketbaseServerFlutter.localIpAddress,
+  port: "8080",
   enablePocketbaseApiLogs: true,
+  dataPath: dataFolder,
+  staticFilesPath: staticFolder,
+  hookFilesPath: hooksFolder,
 );
 ```
 
@@ -51,7 +90,6 @@ PocketbaseServerFlutter.pocketbaseMobileVersion
 PocketbaseServerFlutter.localIpAddress
 ```
 
-
 ## Setup
 
 - IOS
@@ -66,20 +104,16 @@ Then in `Link Binary With Libraries` section, click on `+` button and search for
 
 ![image](https://github.com/rohitsangwan01/pocketbase_server_flutter/assets/59526499/412fda4d-48b4-44df-88dc-6134c1339518)
 
-
-
 - Android
 
-Should work out of the box 
-
+Should work out of the box
 
 ## Resources
 
 https://pocketbase.io/
 
-Built with: [pocketbase_mobile](https://github.com/rohitsangwan01/pocketbase_mobile), [pocketbase_android](https://github.com/rohitsangwan01/pocketbase_android
-), [pocketbase_ios](https://github.com/rohitsangwan01/pocketbase_ios)
+Built with: [pocketbase_mobile](https://github.com/rohitsangwan01/pocketbase_mobile)
 
 ## Note
 
-This is for running Pocketbase server from mobile, to connect with pocketbase server, use official [pockebase](https://pub.dev/packages/pocketbase) client plugin
+This is for running Pocketbase server from mobile, to connect with pocketbase server, use official [pocketbase](https://pub.dev/packages/pocketbase) client plugin

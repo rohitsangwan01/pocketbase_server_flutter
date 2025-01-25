@@ -24,4 +24,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/
+    - pb_hooks/
+    - pb_static/

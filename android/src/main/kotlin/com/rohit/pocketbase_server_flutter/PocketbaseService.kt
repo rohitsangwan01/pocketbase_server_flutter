@@ -26,6 +26,9 @@ class PocketbaseService : Service() {
     private var hostname = Utils.defaultHostName
     private var port = Utils.defaultPort
     private var staticFilesPath = ""
+    private var hookFilesPath = ""
+    private var superUserEmail = ""
+    private var superUserPassword = ""
     private var enablePocketbaseApiLogs = false
     private val uiScope = CoroutineScope(Dispatchers.Main + Job())
     private var wakeLock: PowerManager.WakeLock? = null
@@ -53,7 +56,18 @@ class PocketbaseService : Service() {
             intent?.extras?.getString("port")?.let { port = it }
             intent?.extras?.getString("staticFilesPath")?.let { staticFilesPath = it }
             enablePocketbaseApiLogs = intent?.extras?.getBoolean("enablePocketbaseApiLogs") ?: false
-            startPocketbase(dataPath, hostname, port, staticFilesPath)
+            intent?.extras?.getString("superUserEmail")?.let { superUserEmail = it }
+            intent?.extras?.getString("superUserPassword")?.let { superUserPassword = it }
+            intent?.extras?.getString("hookFilesPath")?.let { hookFilesPath = it }
+            startPocketbase(
+                dataPath,
+                hostname,
+                port,
+                staticFilesPath,
+                superUserEmail,
+                superUserPassword,
+                hookFilesPath
+            )
         }
         return super.onStartCommand(intent, flags, startId)
     }
@@ -89,6 +103,9 @@ class PocketbaseService : Service() {
         hostname: String,
         port: String,
         staticFilesPath: String,
+        superUserEmail: String,
+        superUserPassword: String,
+        hookFilesPath: String,
     ) {
         Log.d("Pocketbase", "StartingPocketbase with $staticFilesPath")
         uiScope.launch {
@@ -99,6 +116,9 @@ class PocketbaseService : Service() {
                     port,
                     staticFilesPath,
                     enablePocketbaseApiLogs,
+                    superUserEmail,
+                    superUserPassword,
+                    hookFilesPath,
                 )
             }
         }

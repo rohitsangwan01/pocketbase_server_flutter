@@ -3,7 +3,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pocketbase_server_flutter/pocketbase_server_flutter.dart';
 
@@ -37,26 +36,36 @@ class _MyAppState extends State<MyApp> {
 
   void startServer() async {
     final Directory staticDir = await getTemporaryDirectory();
-    final String staticFolder = "${staticDir.path}/pb_public/";
+    final String staticFolder = "${staticDir.path}/pb_static/";
+    final String hooksFolder = "${staticDir.path}/pb_hooks/";
     final String dataFolder = "${staticDir.path}/pb_data/";
 
-    await PocketbaseServerFlutter.copyAssetsToPath(
+    await PocketbaseServerFlutter.copyAssetsFolderToPath(
       path: staticFolder,
-      assets: [
-        "assets/index.html",
-      ],
+      assetFolder: "pb_static",
+      overwriteExisting: true,
+    );
+
+    await PocketbaseServerFlutter.copyAssetsFolderToPath(
+      path: hooksFolder,
+      assetFolder: "pb_hooks",
       overwriteExisting: true,
     );
 
     print("StaticDir: $staticFolder");
+    print("HooksDir: $hooksFolder");
+    print("DataDir: $dataFolder");
 
     // Serve this directory
     await PocketbaseServerFlutter.start(
+      superUserEmail: "test@user.com",
+      superUserPassword: "password",
       hostName: await PocketbaseServerFlutter.localIpAddress,
       port: "5000",
       enablePocketbaseApiLogs: true,
       dataPath: dataFolder,
       staticFilesPath: staticFolder,
+      hookFilesPath: hooksFolder,
     );
   }
 

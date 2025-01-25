@@ -41,12 +41,15 @@ public class PocketbaseServerFlutterPlugin: NSObject, FlutterPlugin {
     let dataPath = (argument?["dataPath"] as? String) ?? getDefaultDirectory()
     let staticFilesPath: String = (argument?["staticFilesPath"] as? String) ?? ""
     let enablePocketbaseApiLogs: Bool = (argument?["enablePocketbaseApiLogs"] as? Bool) ?? true
+    let superUserEmail = (argument?["superUserEmail"] as? String) ?? ""
+    let superUserPassword = (argument?["superUserPassword"] as? String) ?? ""
+    let hookFilesPath = (argument?["hookFilesPath"] as? String) ?? ""
     if dataPath == nil {
       result(FlutterError(code: "dataPathError", message: "Please pass valid dataPath", details: nil))
       return
     }
     DispatchQueue.global(qos: .userInitiated).async {
-      PocketbaseMobileStartPocketbase(dataPath!, hostName, port, staticFilesPath, enablePocketbaseApiLogs)
+      PocketbaseMobileStartPocketbase(dataPath!, hostName, port, staticFilesPath, enablePocketbaseApiLogs, superUserEmail, superUserPassword, hookFilesPath)
       self.isRunning = true
     }
     result(nil)

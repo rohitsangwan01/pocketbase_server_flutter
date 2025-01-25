@@ -53,7 +53,7 @@ android {
         testImplementation 'org.mockito:mockito-core:5.2.0'
         implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
         implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
-        implementation 'com.github.rohitsangwan01:pocketbase_android:2.0.1'
+        implementation 'com.github.rohitsangwan01:pocketbase_mobile:1.0.0'
     }
 
     testOptions {

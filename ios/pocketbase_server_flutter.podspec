@@ -22,6 +22,6 @@ A new Flutter plugin project.
   s.swift_version = '5.0'
 
   s.prepare_command = './prepare-iOS-SDK.sh'
-  s.vendored_frameworks = 'pocketbase_ios/PocketbaseMobile.xcframework'
-  s.preserve_paths = 'pocketbase_ios/PocketbaseMobile.xcframework'
+  s.vendored_frameworks = 'PocketbaseMobile.xcframework'
+  s.preserve_paths = 'PocketbaseMobile.xcframework'
 end

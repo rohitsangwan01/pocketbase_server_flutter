@@ -1,6 +1,6 @@
 name: pocketbase_server_flutter
 description: Start Pocketbase Server directly from Android/IOS with flutter
-version: 0.0.2
+version: 1.0.0
 homepage: https://github.com/rohitsangwan01/pocketbase_server_flutter
 repository: https://github.com/rohitsangwan01/pocketbase_server_flutter
 issue_tracker: https://github.com/rohitsangwan01/pocketbase_server_flutter/issues
