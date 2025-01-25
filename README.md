@@ -10,7 +10,7 @@ Run [Pocketbase](https://pocketbase.io/) Server directly from Android/IOS with f
 
 Checkout [Pocketbase Server](https://github.com/rohitsangwan01/pocketbase_server_flutter_app) example app
 
-Start pocketbaseServer
+### Start pocketbaseServer
 
 ```dart
 PocketbaseServerFlutter.start(
@@ -21,7 +21,7 @@ PocketbaseServerFlutter.start(
 );
 ```
 
-### Advance Usage
+### Advanced Usage
 
 ```dart
 // Get path to load resources using `path_provider`
