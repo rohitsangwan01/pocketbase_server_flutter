@@ -26,3 +26,4 @@ flutter:
   assets:
     - pb_hooks/
     - pb_static/
+    - binaries/mac/
