@@ -36,9 +36,10 @@ class _MyAppState extends State<MyApp> {
 
   void startServer() async {
     final Directory staticDir = await getTemporaryDirectory();
-    final String staticFolder = "${staticDir.path}/pb_static/";
-    final String hooksFolder = "${staticDir.path}/pb_hooks/";
-    final String dataFolder = "${staticDir.path}/pb_data/";
+    final String basePath = "${staticDir.path}/pocketbase_server";
+    final String staticFolder = "$basePath/pb_static/";
+    final String hooksFolder = "$basePath/pb_hooks/";
+    final String dataFolder = "$basePath/pb_data/";
 
     await PocketbaseServerFlutter.copyAssetsFolderToPath(
       path: staticFolder,
@@ -52,6 +53,17 @@ class _MyAppState extends State<MyApp> {
       overwriteExisting: true,
     );
 
+    String? pocketbaseExecutable;
+    if (Platform.isMacOS) {
+      // Similarly Copy for rest of the platforms
+      await PocketbaseServerFlutter.copyAssetsToPath(
+        path: basePath,
+        overwriteExisting: false,
+        assets: ["binaries/mac/pocketbase_arm"],
+      );
+      pocketbaseExecutable = "$basePath/pocketbase_arm";
+    }
+
     print("StaticDir: $staticFolder");
     print("HooksDir: $hooksFolder");
     print("DataDir: $dataFolder");
@@ -60,6 +72,7 @@ class _MyAppState extends State<MyApp> {
     await PocketbaseServerFlutter.start(
       superUserEmail: "test@user.com",
       superUserPassword: "password",
+      pocketbaseExecutable: pocketbaseExecutable,
       hostName: await PocketbaseServerFlutter.localIpAddress,
       port: "5000",
       enablePocketbaseApiLogs: true,

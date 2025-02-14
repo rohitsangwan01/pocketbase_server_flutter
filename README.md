@@ -90,7 +90,7 @@ PocketbaseServerFlutter.pocketbaseMobileVersion
 PocketbaseServerFlutter.localIpAddress
 ```
 
-## Setup
+## Mobile Setup
 
 - IOS
 
@@ -105,6 +105,38 @@ Then in `Link Binary With Libraries` section, click on `+` button and search for
 ![image](https://github.com/rohitsangwan01/pocketbase_server_flutter/assets/59526499/412fda4d-48b4-44df-88dc-6134c1339518)
 
 - Android
+
+Should work out of the box
+
+## Desktop Setup
+
+Desktop requires `pocketbaseExecutable` path in `start()`
+
+To get `pocketbaseExecutable` in app, add the executable in Assets and on runtime copy it from assets to another path using path_provider
+Or download the executable on Runtime
+
+- MacOS
+
+Edit your `Runner/**.entitlements` file
+
+```plist
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>com.apple.security.app-sandbox</key>
+		<false />
+		<key>com.apple.security.cs.allow-jit</key>
+		<true />
+		<key>com.apple.security.network.client</key>
+		<true />
+		<key>com.apple.security.network.server</key>
+		<true />
+	</dict>
+</plist>
+```
+
+- Windows, Linux
 
 Should work out of the box
 

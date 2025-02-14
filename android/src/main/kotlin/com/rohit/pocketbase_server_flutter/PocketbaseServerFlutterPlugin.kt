@@ -36,8 +36,8 @@ class PocketbaseServerFlutterPlugin : FlutterPlugin, MethodChannel.MethodCallHan
     private var messageConnector: BasicMessageChannel<Any>? = null
     private var channel: MethodChannel? = null
     private var mainThreadHandler: Handler? = null
-    private lateinit var context: Context
-    private lateinit var activity: Activity
+    private var context: Context? = null
+    private var activity: Activity? = null
 
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         val binaryMessenger: BinaryMessenger = flutterPluginBinding.binaryMessenger
@@ -82,6 +82,7 @@ class PocketbaseServerFlutterPlugin : FlutterPlugin, MethodChannel.MethodCallHan
         channel?.setMethodCallHandler(null)
         messageConnector = null
         mainThreadHandler = null
+        context = null
     }
 
 
@@ -105,12 +106,14 @@ class PocketbaseServerFlutterPlugin : FlutterPlugin, MethodChannel.MethodCallHan
             result.error("notificationPermission", "Notification permission required", null)
             return
         }
-        val intent = Intent(context, PocketbaseService::class.java)
-        initializeArguments(intent, args)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.startForegroundService(intent)
-        } else {
-            context.startService(intent)
+        if (context != null) {
+            val intent = Intent(context, PocketbaseService::class.java)
+            initializeArguments(intent, args)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context?.startForegroundService(intent)
+            } else {
+                context?.startService(intent)
+            }
         }
         result.success(null)
     }
@@ -148,12 +151,14 @@ class PocketbaseServerFlutterPlugin : FlutterPlugin, MethodChannel.MethodCallHan
             result.error("pocketbaseNotRunning", "Pocketbase not running", null)
             return
         }
-        val intent = Intent(context, PocketbaseService::class.java)
-        intent.action = PocketbaseService.stopServiceAction
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.startForegroundService(intent)
-        } else {
-            context.startService(intent)
+        if (context != null) {
+            val intent = Intent(context, PocketbaseService::class.java)
+            intent.action = PocketbaseService.stopServiceAction
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context?.startForegroundService(intent)
+            } else {
+                context?.startService(intent)
+            }
         }
         result.success(null)
     }
@@ -178,13 +183,14 @@ class PocketbaseServerFlutterPlugin : FlutterPlugin, MethodChannel.MethodCallHan
 
     private fun haveNotificationPermission(): Boolean {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return true
+        if (context == null) return false
         if (ActivityCompat.checkSelfPermission(
-                context,
+                context!!,
                 Manifest.permission.POST_NOTIFICATIONS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
-                activity,
+                activity!!,
                 arrayOf(Manifest.permission.POST_NOTIFICATIONS),
                 notificationPermissionResultCode
             )
@@ -221,8 +227,12 @@ class PocketbaseServerFlutterPlugin : FlutterPlugin, MethodChannel.MethodCallHan
         activity = binding.activity
     }
 
+    override fun onDetachedFromActivity() {
+        activity = null
+    }
+
     override fun onDetachedFromActivityForConfigChanges() {}
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {}
-    override fun onDetachedFromActivity() {}
+
 }
 
