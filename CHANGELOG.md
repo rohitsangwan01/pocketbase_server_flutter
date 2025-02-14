@@ -1,3 +1,8 @@
+## 1.1.0
+
+- Add Desktop Support
+- Fix minor Native issues
+
 ## 1.0.0
 
 - Update Pocketbase 0.24.4
